@@ -4,6 +4,7 @@ import express, { Request, Response } from 'express';
 export function activate(context: vscode.ExtensionContext) {
   const app = express();
   app.use(express.json());
+  app.use(express.urlencoded({ extended: true }));
 
   // Copilot Chat 뷰 열기
   vscode.commands.executeCommand('github.copilot.chat.openChat')
@@ -11,7 +12,7 @@ export function activate(context: vscode.ExtensionContext) {
 
   // /prompt 엔드포인트
   app.post('/prompt', async (req: Request, res: Response): Promise<void> => {
-    const { prompt } = req.body;
+    const { prompt } = req.body || {};
     if (typeof prompt !== 'string' || !prompt.trim()) {
       res.status(400).send({ error: 'Invalid prompt' });
       return;
