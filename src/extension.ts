@@ -8,7 +8,10 @@ export function activate(context: vscode.ExtensionContext) {
 
   // Copilot Chat 뷰 열기
   vscode.commands.executeCommand('github.copilot.chat.openChat')
-    .then(undefined, err => console.error('Chat open failed:', err));
+    .then(undefined, err => {
+      console.error('Chat open failed:', err);
+      vscode.window.showErrorMessage('Failed to open Copilot Chat. Please ensure GitHub Copilot is installed and enabled.');
+    });
 
   // /prompt 엔드포인트
   app.post('/prompt', async (req: Request, res: Response): Promise<void> => {
@@ -25,6 +28,7 @@ export function activate(context: vscode.ExtensionContext) {
       res.send({ status: 'sent' });
     } catch (e) {
       console.error(e);
+      vscode.window.showErrorMessage(`Failed to receive prompt: ${String(e)}`);
       res.status(500).send({ error: String(e) });
     }
   });
