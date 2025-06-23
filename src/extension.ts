@@ -19,7 +19,7 @@ export function activate(context: vscode.ExtensionContext) {
     }
     try {
       await vscode.commands.executeCommand(
-        'github.copilot.chat.sendMessage',
+        'workbench.action.chat.open',
         prompt
       );
       res.send({ status: 'sent' });
