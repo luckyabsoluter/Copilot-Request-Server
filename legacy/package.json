@@ -1,0 +1,36 @@
+{
+  "name": "copilot-agent-server",
+  "displayName": "Copilot Agent Server",
+  "description": "HTTP 서버를 띄워 외부 프롬프트를 Copilot Chat에 전달",
+  "version": "0.0.1",
+  "publisher": "your-name",
+  "engines": {
+    "vscode": "^1.22.0"
+  },
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./out/extension.js",
+  "scripts": {
+    "compile": "tsc -p .",
+    "watch": "tsc -w -p ."
+  },
+  "dependencies": {
+    "clean": "^4.0.2",
+    "express": "^5.1.0"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.3",
+    "@types/vscode": "^1.101.0",
+    "typescript": "^5.8.3",
+    "vscode": "^1.1.34"
+  },
+  "contributes": {
+    "commands": [
+      {
+        "command": "copilotAgentServer.start",
+        "title": "Copilot Agent Server: Start"
+      }
+    ]
+  }
+}
